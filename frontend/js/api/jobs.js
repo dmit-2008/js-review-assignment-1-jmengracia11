@@ -17,7 +17,8 @@ export function fetchAllJobs() {
 
 // function to search jobs by a query
 export function searchJobs(query) {
-    return fetch(`${BASE_URL}?query=${encodeURIComponent(query)}`)
+    console.log('Searching jobs with query:', query); 
+    return fetch(`${BASE_URL}?search=${encodeURIComponent(query)}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to search jobs');
@@ -25,9 +26,10 @@ export function searchJobs(query) {
         return response.json();
       })
       .catch(error => {
-        console.error('Error searching jobs:', error);
+        console.log('Error searching jobs:', error);
       });
   }
+  
 
 // function to fetch job details by job ID
 export function fetchJobDetails(jobId) {
@@ -42,3 +44,7 @@ export function fetchJobDetails(jobId) {
         console.error('Error fetching job details:', error);
       });
   }
+
+  
+  
+  
