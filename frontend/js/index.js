@@ -18,33 +18,32 @@ window.onload = function() {
   // from submission even to search jobs
   document.getElementById('search-jobs-form').addEventListener('submit', function(event) {
     event.preventDefault(); 
-    const query = document.getElementById('query-input').value.trim(); 
+    const search = document.getElementById('query-input').value.trim();  
 
-    if (query) {
-        searchJobs(query).then(jobs => {
-            if (jobs) {
-                console.log('Search results:', jobs); 
-                displayJobs(jobs);
-            } else {
-                console.log('No jobs found for the search query.');
-                displayJobs([]);
-            }
-        }).catch(error => {
-            console.log('Error searching jobs:', error);
-            displayJobs([]); 
-        });
+    if (search) {
+        searchJobs(search) 
+            .then(jobs => {
+                console.log('Search results:', jobs);
+                displayJobs(jobs || []);
+            })
+            .catch(error => {
+                console.log('Error searching jobs:', error);
+                displayJobs([]); 
+            });
     } else {
-        console.log('No search query entered. Displaying all jobs.');
-        fetchAllJobs().then(jobs => {
-            if (jobs) {
-                displayJobs(jobs);
-            }
-        }).catch(error => {
-            console.log('Error fetching all jobs:', error);
-            displayJobs([]);
-        });
+        console.log('No search query entered. Fetching all jobs.');
+        fetchAllJobs()
+            .then(jobs => {
+                console.log('Displaying all jobs:', jobs);
+                displayJobs(jobs || []);
+            })
+            .catch(error => {
+                console.log('Error fetching all jobs:', error);
+                displayJobs([]); 
+            });
     }
 });
+
 
   // event listener to view job details when button is clicked
   document.getElementById('searched-jobs').addEventListener('click', function(event) {

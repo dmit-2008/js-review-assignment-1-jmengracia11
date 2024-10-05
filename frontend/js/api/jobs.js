@@ -16,9 +16,9 @@ export function fetchAllJobs() {
   }
 
 // function to search jobs by a query
-export function searchJobs(query) {
-    console.log('Searching jobs with query:', query); 
-    return fetch(`${BASE_URL}?search=${encodeURIComponent(query)}`)
+export function searchJobs(search) {
+    console.log('Searching jobs with query:', search); 
+    return fetch(`${BASE_URL}?search=${encodeURIComponent(search)}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to search jobs');
@@ -28,7 +28,7 @@ export function searchJobs(query) {
       .catch(error => {
         console.log('Error searching jobs:', error);
       });
-  }
+}
   
 
 // function to fetch job details by job ID
