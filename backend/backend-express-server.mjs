@@ -21,7 +21,7 @@ app.listen(3000, () => {
 });
 
 // GET endpoint to list jobs and search for jobs
-app.get('/jobs', async (req, res) => {
+app.get('/api/jobs', async (req, res) => {
   try {
 
     const { q } = req.query;
@@ -51,7 +51,7 @@ app.get('/jobs', async (req, res) => {
 });
 
 // GET endpoint to fetch a single job by id
-app.get('/jobs/:id', async (req, res) => {
+app.get('/api/jobs/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const job = await prisma.job.findUnique({
@@ -73,7 +73,7 @@ app.get('/jobs/:id', async (req, res) => {
 })
 
 // POST endpoint to save a job
-app.post('/saved-jobs', async (req, res) => {
+app.post('/api/saved-jobs', async (req, res) => {
   try {
     // parse the body of the request
     const { jobId } = req.body;
